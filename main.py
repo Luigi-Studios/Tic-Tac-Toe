@@ -1,4 +1,4 @@
-# CleanCode
+# Tic Tac Toe in der Konsole
 
 # TODO: Wenn fertig, check_for_wins als eine Funktion versuchen, umzuprogrammieren
 # TODO: Wenn fertig, Befehle wie "Quit" "New Game" "Continue" "Stats" einbauen
