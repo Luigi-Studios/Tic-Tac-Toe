@@ -17,7 +17,7 @@ spots = {"1": " ", "2": " ", "3": " ",
          "4": " ", "5": " ", "6": " ",
          "7": " ", "8": " ", "9": " "}
 
-skip = False
+made_another_valid_input = False
 
 """ Funktionen """
 
@@ -61,6 +61,9 @@ def show_stats():
     print("+---| Spiel-Stats |---+ ")
     print(f" ○ Spieler-Spots: {spieler_spots} ➜ Züge: {len(spieler_spots)}")
     print(f" ○ Computer-Spots: {computer_spots} ➜ Züge: {len(computer_spots)}\n")
+
+    # returns true, so the control loop it not executed
+    return True
 
 
 # Gegenspieler
@@ -211,6 +214,20 @@ def check_for_wins():
             computer_check.clear()
 
 
+# untersucht das aktuelle Spiel auf ein Unentschieden
+def istUntenschieden():
+    availible_spots_left = []
+
+    for spot in spots:
+        if spots[spot] == " ":
+            availible_spots_left.append(spot)
+
+    if len(availible_spots_left) == 0:
+        return True
+    else:
+        return False
+
+
 """ Game Loop """
 
 # Willkommenstext am Start
@@ -229,9 +246,9 @@ while active:
     if user_input == "Quit":
         quit()
     elif user_input == "Skip":
-        skip = skip_play_move()
+        made_another_valid_input = skip_play_move()
     elif user_input == "Stats":
-        show_stats()
+        made_another_valid_input = show_stats()
     else:
         pass
 
@@ -246,7 +263,7 @@ while active:
     """ jetzt checken wir, ob die Eingabe zwischen 1 und 9 ist. Wenn das nicht der Fall ist, fordern wir den User
            wie immer dazu auf, solange eine Eingabe zu machen, bis die zwischen 1 und 9 ist. """
 
-    if not skip:
+    if not made_another_valid_input:
         try:
 
             """ User Input verarbeiten """
@@ -273,7 +290,7 @@ while active:
                         else:
                             # Es ist zwischen 1 und 9!
                             # wenn es alle Tests erfolgreich durchlaufen hat, dann kann es weiter gehen!
-                            skip = False
+                            made_another_valid_input = False
                             break
                     except ValueError:
                         # Error Handling
@@ -286,8 +303,25 @@ while active:
             if check_spot(convert_user_input):
                 # Spot ist frei
                 change_state(convert_user_input, 1)
-                change_state(Computer(), 2)
-                show_game(spots)
+
+                if check_for_wins() == "Spieler":
+                    show_game(spots)
+                    print("Spieler hat gewonnen!")
+                    quit()
+
+                elif check_for_wins() == "Computer":
+                    show_game(spots)
+                    print("Computer hat gewonnen!")
+                    quit()
+
+                elif istUntenschieden():
+                    show_game(spots)
+                    print("Unentschieden!")
+                    quit()
+
+                else:
+                    change_state(Computer(), 2)
+                    show_game(spots)
             else:
                 # Spot ist nicht frei
                 print("Spot schon besetzt, bitte einen Anderen wählen!")
