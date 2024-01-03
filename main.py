@@ -1,8 +1,9 @@
 # Tic Tac Toe in der Konsole
 
 # TODO: Wenn fertig, check_for_wins als eine Funktion versuchen, umzuprogrammieren
-# TODO: Wenn fertig, Befehle wie "Quit" "New Game" "Continue" "Stats" einbauen
+# TODO: Wenn fertig, Befehle wie "Quit" "New Game" "Skip" "Stats" einbauen
 # TODO: Wenn fertig, wins mit Primzahlen und Produkten probieren
+# TODO: CLEANUP
 
 """ Bibliotheken """
 
@@ -230,6 +231,33 @@ def istUntenschieden():
         return False
 
 
+# creates the a new game
+def new_game():
+    # asking the player if he/she really wants to continue
+    print("Beim Erstellen eines neuen Spieles werden alle aktuellen Daten\nwie Positionen gelöscht und das Spiel "
+          "startet von neu.\nMöchtest du fortfahren? j[a] oder n[ein]\n")
+
+    eingabe = input("Eingabe: ")
+    if eingabe == "j" or eingabe == "n":
+        if eingabe == "j":
+            print("Neues Spiel wird erstellt")
+            return True
+        if eingabe == "n":
+            print("Vorgang wird abgebrochen")
+            return False
+    else:
+        while eingabe != "j" or eingabe != "n":
+            print("Falsche Eingabe! Gebe entweder [j]a oder [n]ein ein!")
+            eingabe = input("Eingabe: ")
+            if eingabe == "j" or eingabe == "n":
+                if eingabe == "j":
+                    print("Neues Spiel wird erstellt")
+                    return True
+                if eingabe == "n":
+                    print("Vorgang wird abgebrochen")
+                    return False
+
+
 """ Game Loop """
 
 # Willkommenstext am Start
@@ -251,6 +279,8 @@ while active:
         made_another_valid_input = skip_play_move()
     elif user_input == "Stats":
         made_another_valid_input = show_stats()
+    elif user_input == "New Game":
+        made_another_valid_input = new_game()
     else:
         pass
 
