@@ -233,6 +233,9 @@ def istUntenschieden():
 
 # creates the a new game
 def new_game():
+
+    allowed_to_delete_game = False
+
     # asking the player if he/she really wants to continue
     print("Beim Erstellen eines neuen Spieles werden alle aktuellen Daten\nwie Positionen gelöscht und das Spiel "
           "startet von neu.\nMöchtest du fortfahren? j[a] oder n[ein]\n")
@@ -241,10 +244,9 @@ def new_game():
     if eingabe == "j" or eingabe == "n":
         if eingabe == "j":
             print("Neues Spiel wird erstellt")
-            return True
+            allowed_to_delete_game = True
         if eingabe == "n":
             print("Vorgang wird abgebrochen")
-            return False
     else:
         while eingabe != "j" or eingabe != "n":
             print("Falsche Eingabe! Gebe entweder [j]a oder [n]ein ein!")
@@ -252,10 +254,16 @@ def new_game():
             if eingabe == "j" or eingabe == "n":
                 if eingabe == "j":
                     print("Neues Spiel wird erstellt")
-                    return True
+                    allowed_to_delete_game = True
                 if eingabe == "n":
                     print("Vorgang wird abgebrochen")
-                    return False
+
+    # creating new game
+    if allowed_to_delete_game:
+        spots = {"1": " ", "2": " ", "3": " ",
+                 "4": " ", "5": " ", "6": " ",
+                 "7": " ", "8": " ", "9": " "}
+        print(spots)
 
 
 """ Game Loop """
