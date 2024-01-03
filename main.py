@@ -90,6 +90,7 @@ def skip_play_move():
     if eingabe == "j" or eingabe == "n":
         if eingabe == "j":
             print("Spielzug wurde übersprungen")
+            change_state(Computer(), 2)
             show_game(spots)
             return True
         if eingabe == "n":
@@ -104,6 +105,7 @@ def skip_play_move():
             if eingabe == "j" or eingabe == "n":
                 if eingabe == "j":
                     print("Spielzug wurde übersprungen")
+                    change_state(Computer(), 2)
                     show_game(spots)
                     return True
                 if eingabe == "n":
@@ -216,13 +218,13 @@ def check_for_wins():
 
 # untersucht das aktuelle Spiel auf ein Unentschieden
 def istUntenschieden():
-    availible_spots_left = []
+    available_spots_left = []
 
     for spot in spots:
         if spots[spot] == " ":
-            availible_spots_left.append(spot)
+            available_spots_left.append(spot)
 
-    if len(availible_spots_left) == 0:
+    if len(available_spots_left) == 0:
         return True
     else:
         return False
