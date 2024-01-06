@@ -55,6 +55,7 @@ def show_game(current_spots: dict):
 
 # shows the current stats
 def show_stats():
+    # Alle Spots werden nach "x" und "o" gefiltert
     spieler_spots = [int(player_spot) for player_spot in spots if spots[player_spot] == "x"]
     computer_spots = [int(computer_spot) for computer_spot in spots if spots[computer_spot] == "o"]
     print("+---| Spiel-Stats |---+ ")
@@ -86,28 +87,34 @@ def Computer():
 def skip_play_move():
     print("Möchtest du deinen Spielzug wirklich überspringen? [j]a oder [n]ein")
     eingabe = input("Eingabe: ")
+
+    # Eingabeverarbeitung
     if eingabe == "j" or eingabe == "n":
         if eingabe == "j":
+            # Erfolg
             print("Spielzug wurde übersprungen")
             change_state(Computer(), 2)
             show_game(spots)
             return True
         if eingabe == "n":
-
+            # Abbruch
             print("Spielzug wird nicht übersprungen")
             show_game(spots)
             return False
     else:
+        # wenn eine falsche Eingabe gemacht wird, läuft dieser Loop solange, bis die Eingabe korrekt ist
         while eingabe != "j" or eingabe != "n":
             print("Falsche Eingabe! Gebe entweder [j]a oder [n]ein ein!")
             eingabe = input("Eingabe: ")
             if eingabe == "j" or eingabe == "n":
                 if eingabe == "j":
+                    # Erfolg
                     print("Spielzug wurde übersprungen")
                     change_state(Computer(), 2)
                     show_game(spots)
                     return True
                 if eingabe == "n":
+                    # Abbruch
                     print("Spielzug wird nicht übersprungen")
                     show_game(spots)
                     return False
@@ -216,7 +223,7 @@ def check_for_wins():
 
 
 # untersucht das aktuelle Spiel auf ein Unentschieden
-def istUntenschieden():
+def isADraw():
     available_spots_left = []
 
     for spot in spots:
@@ -317,7 +324,7 @@ while active:
                     print("Computer hat gewonnen!")
                     quit()
 
-                elif istUntenschieden():
+                elif isADraw():
                     show_game(spots)
                     print("Unentschieden!")
                     quit()
