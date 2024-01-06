@@ -231,41 +231,6 @@ def istUntenschieden():
         return False
 
 
-# creates the a new game
-def new_game():
-
-    allowed_to_delete_game = False
-
-    # asking the player if he/she really wants to continue
-    print("Beim Erstellen eines neuen Spieles werden alle aktuellen Daten\nwie Positionen gelöscht und das Spiel "
-          "startet von neu.\nMöchtest du fortfahren? j[a] oder n[ein]\n")
-
-    eingabe = input("Eingabe: ")
-    if eingabe == "j" or eingabe == "n":
-        if eingabe == "j":
-            print("Neues Spiel wird erstellt")
-            allowed_to_delete_game = True
-        if eingabe == "n":
-            print("Vorgang wird abgebrochen")
-    else:
-        while eingabe != "j" or eingabe != "n":
-            print("Falsche Eingabe! Gebe entweder [j]a oder [n]ein ein!")
-            eingabe = input("Eingabe: ")
-            if eingabe == "j" or eingabe == "n":
-                if eingabe == "j":
-                    print("Neues Spiel wird erstellt")
-                    allowed_to_delete_game = True
-                if eingabe == "n":
-                    print("Vorgang wird abgebrochen")
-
-    # creating new game
-    if allowed_to_delete_game:
-        spots = {"1": " ", "2": " ", "3": " ",
-                 "4": " ", "5": " ", "6": " ",
-                 "7": " ", "8": " ", "9": " "}
-        print(spots)
-
-
 """ Game Loop """
 
 # Willkommenstext am Start
@@ -275,10 +240,12 @@ say_hello()
 active = True
 # the game loop
 while active:
+    # switch back to normal
+    made_another_valid_input = False
 
     """ User Inputs """
 
-    user_input = input("Position: ")
+    user_input = input("246 Position: ")
 
     # Als erstes schauen wir, ob die Eingabe "Quit" ist
     if user_input == "Quit":
@@ -287,8 +254,6 @@ while active:
         made_another_valid_input = skip_play_move()
     elif user_input == "Stats":
         made_another_valid_input = show_stats()
-    elif user_input == "New Game":
-        made_another_valid_input = new_game()
     else:
         pass
 
@@ -316,7 +281,7 @@ while active:
                 print("Falsche Eingabe! Gebe bitte eine Zahl zwischen 1 und 9 ein!")
                 # solange wiederholen, bis Eingabe korrekt ist
                 while convert_user_input < 1 or convert_user_input > 9:
-                    check_user_input = input("Position: ")
+                    check_user_input = input("282 Position: ")
                     # versuchen, es in einen Integer zu konvertieren
                     if check_user_input == "Quit":
                         # wenn die Eingabe "Quit" ist, dann beenden wir das Spiel
