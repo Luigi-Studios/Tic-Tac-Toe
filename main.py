@@ -71,10 +71,12 @@ def Computer():
     # die Liste aus Positionen, die der Computer zu Verfügung hat
     verfuegbare_Positionen = []
 
+    # geht durch alle Spots durch und filtert freie Spots
     for current_spot in spots:
         if check_spot(int(current_spot)):
             verfuegbare_Positionen.append(int(current_spot))
 
+    # zufällige Auswahl
     zufaellige_Position = random.choice(verfuegbare_Positionen)
     # schauen, ob die zufällige Position schon frei ist
     if check_spot(zufaellige_Position):
@@ -226,10 +228,13 @@ def check_for_wins():
 def isADraw():
     available_spots_left = []
 
+    # geht durch alle Spots durch und filtert die verfügbaren Spots heraus
     for spot in spots:
         if spots[spot] == " ":
             available_spots_left.append(spot)
 
+    # wenn es keine verfügbaren Spots mehr gibt, also alles voll ist, aber kein Win vorhanden ist, dann True für
+    # unentschieden, sonst False
     if len(available_spots_left) == 0:
         return True
     else:
@@ -252,7 +257,7 @@ while active:
 
     user_input = input("246 Position: ")
 
-    # Als erstes schauen wir, ob die Eingabe "Quit" ist
+    # Eingabe nach Befehlen checken
     if user_input == "Quit":
         quit()
     elif user_input == "Skip":
@@ -315,21 +320,25 @@ while active:
                 change_state(convert_user_input, 1)
 
                 if check_for_wins() == "Spieler":
+                    # Spieler hat gewonnen
                     show_game(spots)
                     print("Spieler hat gewonnen!")
                     quit()
 
                 elif check_for_wins() == "Computer":
+                    # Computer hat gewonnen
                     show_game(spots)
                     print("Computer hat gewonnen!")
                     quit()
 
                 elif isADraw():
+                    # Es ist unentschieden
                     show_game(spots)
                     print("Unentschieden!")
                     quit()
 
                 else:
+                    # wir können normal weiter machen :)
                     change_state(Computer(), 2)
                     show_game(spots)
             else:
@@ -340,9 +349,11 @@ while active:
             """ Gewinn-Analyse """
 
             if check_for_wins() == "Spieler":
+                # Spieler hat gewonnen
                 print("Spieler hat gewonnen!")
                 quit()
             if check_for_wins() == "Computer":
+                # Computer hat gewonnen
                 print("Computer hat gewonnen!")
                 quit()
 
