@@ -1,7 +1,5 @@
 # Tic Tac Toe in der Konsole
 
-# TODO: Wenn fertig, check_for_wins als eine Funktion versuchen, umzuprogrammieren
-# TODO: Wenn fertig, Befehle wie "Quit" "New Game" "Skip" "Stats" einbauen
 # TODO: Wenn fertig, wins mit Primzahlen und Produkten probieren
 # TODO: CLEANUP
 
